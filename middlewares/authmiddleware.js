@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../models/file');
 
 module.exports = async (req, res, next) => {
   const token = req.cookies?.token;
-  if (!token) return res.redirect('/login');
+  if (!token) {
+    return res.redirect('/login')};
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

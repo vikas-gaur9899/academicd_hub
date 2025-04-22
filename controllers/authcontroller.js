@@ -19,7 +19,7 @@ exports.login = async(req,res) =>{
         }
         const token = createtoken(user.id);
         res.cookie('token',token , {http: false , expires: new Date(date.now()+ 60*60*1000)});
-        res.render('some');
+        res.render('dashboard');
     }
     catch (err){
       res.send('invalid credetinals')      

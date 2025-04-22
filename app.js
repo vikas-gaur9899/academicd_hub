@@ -5,8 +5,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const dotenv= require('dotenv');
 const authRoutes = require('./routes/authroutes');
-const fileRoutes = require('./routes/fileRoutes');
-const dashboard = require('./routes/dashboard');
+const fileRoutes = require('./routes/filesroutes');
+// const dashboard = require('./routes/dashboard');
 dotenv.config();
 
 const app = express();
@@ -19,7 +19,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/academichub')
 // Middleware---------
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
-hbs.registerPartials(path.join(__dirname, 'views/layouts'));
+//hbs.registerPartials(path.join(__dirname, 'views/layouts')); for future use if needed
+
 // for parse -------
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -27,8 +28,8 @@ app.use(express.json());
 
 // Routes---------
 app.use('/login', authRoutes);
-app.use('/files', fileRoutes);
-app.use('/dashboard',dashboard);
+
+// app.use('/dashboard',dashboard);
 
 port = process.env.PORT
 app.listen(port, () => {

@@ -10,3 +10,6 @@ authrouter.get('/signup',(req,res)=>{
 
 })
 authrouter.post("/", authController.login)
+authrouter.post("/signup",(req,res)=>{
+    res.send("hello");
+})
