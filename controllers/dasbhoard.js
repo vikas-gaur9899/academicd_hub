@@ -11,7 +11,7 @@ exports.getDashboardPage = (req, res) => {
 };
 
 exports.handleFileUpload = async (req, res) => {
-    const filepath = req.body.subject;
+    const { subject } = req.body;
     const file = req.file;
     if(!file){
         res.send(404).json({
@@ -19,25 +19,26 @@ exports.handleFileUpload = async (req, res) => {
 
         })
     }
-    const newfile = new file({
-        subject :subject,
-        filename : file.filename,
-        filepath : file.path,
-
-    })
-    try {
-        const success =  await newfile.save();
-        
-    }catch (err){
-        console.log(err);
-    }
+    const newFile = new File({
+        subject: subject,
+        filename: file.filename,
+        filepath: file.path,
+        downloaded: 0, // Initialize download count
+      });
+      try {
+        await newFile.save();
+        res.status(200).json({ success: true, message: 'File uploaded successfully'});
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: 'Error saving file ' });
+      }
 
   // Same as your earlier upload logic (PDF conversion)
   // Save into MongoDB too (with downloadCount: 0)
 };
 
 exports.handleFileDownload = async (req, res) => {
-    const filename = req.query.filename;
+    const { filename } = req.query;
     try{
         const file  =  await File.findOne({filename : filename});
         if(!file){
@@ -80,3 +81,5 @@ exports.getMostDownloadedFiles = async (req, res) => {
 
  
 
+
+    
