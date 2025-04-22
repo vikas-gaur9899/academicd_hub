@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const validator = require('validator');
+const mongoose = require('mongoose'); //  to use mongoose 
+
+const bcrypt = require('bcrypt'); // to bcryt the password i use bcr
+const validator = require('validator'); //  for validtaor like email 
 const userschema = new mongoose.Schema({
     username : {
         type: String,
@@ -22,32 +23,26 @@ const userschema = new mongoose.Schema({
         message: 'password must contain at least one number and one special character'
         
     },
-   confirmPassword : {
-    type : String,
-    required : [true , "please confirm your password"],
-    validate : {
-        validator : function (value){
-            return value === this.password;
-        },
-        message : 'password do not match',
-    }
+   
 
 
-   },
+   
    role : {
     type : String,
     required: true,
-    enum : ['student ', 'proffesor']
+    enum : ['student', 'proffesor']
    },
+
     
 
 });
 
-userschema.pre('save',async function(next){
-    if(!this.isModified('password')) {
+userschema.pre('save',async function(next){ // ye route se phle chalega but only in update and save 
+    if(!this.isModified('password')) { // password modified tu nhi hai na 
         return next();
     }
-   this.password = await bcrypt.hash(this.password, 10);
+   this.password = await bcrypt.hash(this.password, 10); // hash kr rha hai 10 rounds mein  
+   //this.confirmPassword = undefined; // undefine kr dyia hai taki vo store na hu 
     next()    ;
 
 })
