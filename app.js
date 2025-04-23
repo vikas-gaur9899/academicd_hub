@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 //const hbs = require('hbs');
+const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
 const dotenv= require('dotenv');
@@ -14,6 +15,7 @@ dotenv.config();
 
 const app = express();
 
+
 // database connection here
 mongoose.connect('mongodb://127.0.0.1:27017/academichub')
   .then(() => console.log('MongoDB connected'))
@@ -25,6 +27,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/academichub')
 //hbs.registerPartials(path.join(__dirname, 'views/layouts')); for future use if needed
 
 // for parse -------
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.static('public'));
 app.use(express.json());
