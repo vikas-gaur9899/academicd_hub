@@ -78,6 +78,25 @@ exports.getMostDownloadedFiles = async (req, res) => {
         
     
     }
+    exports.getsubjectfiles = async(req,res) =>{
+      const { subject } = req.query;
+      try {
+        const files = await File.find({subject : subject})
+
+        
+        res.status(202).json({
+          message : "success",
+          sucess: true,
+          count : files.length,
+          files : files
+
+        })
+
+      }catch(err){
+        res.status(404).send("error");
+      }
+
+    }
 
  
 
