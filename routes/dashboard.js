@@ -1,8 +1,8 @@
 // routes/dashboardRoutes.js
 const express = require('express');
 const router = express.Router();
-const dashboardController = require('../controllers/dashboardController');
-const upload = require('../middlewares/multer'); // multer middleware
+const dashboardController = require('../controllers/dasbhoard');
+const upload = require('../util/mutlerconfig'); // multer middleware
 
 // Dashboard page
 router.get('/', dashboardController.getDashboardPage);///isko simple krsakte 

@@ -1,12 +1,12 @@
 // controllers/dashboardController.js
 const path = require('path');
 const fs = require('fs');
-const File = require('../models/File'); // Mongoose model
-const sharp = require('sharp');
+const File = require('../models/file'); // Mongoose model
+//const sharp = require('sharp');
 //const libre = require('libreoffice-convert');
 
 exports.getDashboardPage = (req, res) => {
-  res.status(202);
+  res.status(202).send("hello");
 
 };
 

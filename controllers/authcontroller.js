@@ -48,9 +48,11 @@ exports.signup = async (req, res) => {
       if (password !== confirmPassword) return res.status(404).send('Passwords do not match');
       
       const user1 = new user({ username, email, password, role }); // create mogoose instance
-      await user1.save();
+       const result = await user1.save();
+
       res.status(200).json({
         message: "user signed succefully",
+        data : result,
        
       });
     } catch (err) {
